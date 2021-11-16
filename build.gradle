@@ -11,8 +11,16 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    implementation {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+        exclude group: 'org.apache.tomcat'
+    }
+}
+
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.4.3'
+    implementation group: 'javax.servlet', name: 'servlet-api', version: '2.5'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.4.3'
     implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.5.0.Final'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
