@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 /**
- * Estimate - estimate of construction site or its part
+ * Estimate - estimated project cost of the construction site or its part
  * @author Lev Goryachev
  * @version 1.1
  */
