@@ -3,6 +3,7 @@ package ru.goryachev.multichief.construction.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Construction - building construction object
@@ -69,5 +70,33 @@ public class Construction {
 
     public void setIsLinear(Boolean isLinear) {
         this.isLinear = isLinear;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Construction)) return false;
+        Construction that = (Construction) o;
+        return Objects.equals(getId(), that.getId()) &&
+                Objects.equals(getObjectCodeNumber(), that.getObjectCodeNumber()) &&
+                Objects.equals(getObjectName(), that.getObjectName()) &&
+                Objects.equals(getObjectDescription(), that.getObjectDescription()) &&
+                Objects.equals(getIsLinear(), that.getIsLinear());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getObjectCodeNumber(), getObjectName(), getObjectDescription(), getIsLinear());
+    }
+
+    @Override
+    public String toString() {
+        return "Construction{" +
+                "id=" + id +
+                ", objectCodeNumber='" + objectCodeNumber + '\'' +
+                ", objectName='" + objectName + '\'' +
+                ", objectDescription='" + objectDescription + '\'' +
+                ", isLinear=" + isLinear +
+                '}';
     }
 }

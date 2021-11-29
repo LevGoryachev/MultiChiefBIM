@@ -3,6 +3,7 @@ package ru.goryachev.multichief.construction.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Eir - employer's information requirements for construction project
@@ -20,10 +21,10 @@ public class Eir {
     private Long id;
 
     @Column(name = "eir_code_number")
-    private String objectCodeNumber;
+    private String eirCodeNumber;
 
     @Column(name = "eir_description")
-    private String objectDescription;
+    private String eirDescription;
 
     @Column(name = "link")
     private String link;
@@ -36,20 +37,20 @@ public class Eir {
         this.id = id;
     }
 
-    public String getObjectCodeNumber() {
-        return objectCodeNumber;
+    public String getEirCodeNumber() {
+        return eirCodeNumber;
     }
 
-    public void setObjectCodeNumber(String objectCodeNumber) {
-        this.objectCodeNumber = objectCodeNumber;
+    public void setEirCodeNumber(String eirCodeNumber) {
+        this.eirCodeNumber = eirCodeNumber;
     }
 
-    public String getObjectDescription() {
-        return objectDescription;
+    public String getEirDescription() {
+        return eirDescription;
     }
 
-    public void setObjectDescription(String objectDescription) {
-        this.objectDescription = objectDescription;
+    public void setEirDescription(String eirDescription) {
+        this.eirDescription = eirDescription;
     }
 
     public String getLink() {
@@ -58,5 +59,31 @@ public class Eir {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Eir)) return false;
+        Eir eir = (Eir) o;
+        return Objects.equals(getId(), eir.getId()) &&
+                Objects.equals(getEirCodeNumber(), eir.getEirCodeNumber()) &&
+                Objects.equals(getEirDescription(), eir.getEirDescription()) &&
+                Objects.equals(getLink(), eir.getLink());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getEirCodeNumber(), getEirDescription(), getLink());
+    }
+
+    @Override
+    public String toString() {
+        return "Eir{" +
+                "id=" + id +
+                ", eirCodeNumber='" + eirCodeNumber + '\'' +
+                ", eirDescription='" + eirDescription + '\'' +
+                ", link='" + link + '\'' +
+                '}';
     }
 }

@@ -15,9 +15,9 @@ public class EirCommonDto implements CommonDto {
 
     private Long id;
 
-    private String objectCodeNumber;
+    private String eirCodeNumber;
 
-    private String objectDescription;
+    private String eirDescription;
 
     private String link;
 
@@ -29,20 +29,20 @@ public class EirCommonDto implements CommonDto {
         this.id = id;
     }
 
-    public String getObjectCodeNumber() {
-        return objectCodeNumber;
+    public String getEirCodeNumber() {
+        return eirCodeNumber;
     }
 
-    public void setObjectCodeNumber(String objectCodeNumber) {
-        this.objectCodeNumber = objectCodeNumber;
+    public void setEirCodeNumber(String eirCodeNumber) {
+        this.eirCodeNumber = eirCodeNumber;
     }
 
-    public String getObjectDescription() {
-        return objectDescription;
+    public String getEirDescription() {
+        return eirDescription;
     }
 
-    public void setObjectDescription(String objectDescription) {
-        this.objectDescription = objectDescription;
+    public void setEirDescription(String eirDescription) {
+        this.eirDescription = eirDescription;
     }
 
     public String getLink() {
@@ -59,22 +59,22 @@ public class EirCommonDto implements CommonDto {
         if (!(o instanceof EirCommonDto)) return false;
         EirCommonDto that = (EirCommonDto) o;
         return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getObjectCodeNumber(), that.getObjectCodeNumber()) &&
-                Objects.equals(getObjectDescription(), that.getObjectDescription()) &&
+                Objects.equals(getEirCodeNumber(), that.getEirCodeNumber()) &&
+                Objects.equals(getEirDescription(), that.getEirDescription()) &&
                 Objects.equals(getLink(), that.getLink());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getObjectCodeNumber(), getObjectDescription(), getLink());
+        return Objects.hash(getId(), getEirCodeNumber(), getEirDescription(), getLink());
     }
 
     @Override
     public String toString() {
         return "EirCommonDto{" +
                 "id=" + id +
-                ", objectCodeNumber='" + objectCodeNumber + '\'' +
-                ", objectDescription='" + objectDescription + '\'' +
+                ", eirCodeNumber='" + eirCodeNumber + '\'' +
+                ", eirDescription='" + eirDescription + '\'' +
                 ", link='" + link + '\'' +
                 '}';
     }

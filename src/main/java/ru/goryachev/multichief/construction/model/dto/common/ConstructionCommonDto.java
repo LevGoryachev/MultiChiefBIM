@@ -55,12 +55,12 @@ public class ConstructionCommonDto implements CommonDto {
         this.objectDescription = objectDescription;
     }
 
-    public Boolean getLinear() {
+    public Boolean getIsLinear() {
         return isLinear;
     }
 
-    public void setLinear(Boolean linear) {
-        isLinear = linear;
+    public void setIsLinear(Boolean isLinear) {
+        this.isLinear = isLinear;
     }
 
     @Override
@@ -72,12 +72,12 @@ public class ConstructionCommonDto implements CommonDto {
                 Objects.equals(getObjectCodeNumber(), that.getObjectCodeNumber()) &&
                 Objects.equals(getObjectName(), that.getObjectName()) &&
                 Objects.equals(getObjectDescription(), that.getObjectDescription()) &&
-                Objects.equals(isLinear, that.isLinear);
+                Objects.equals(getIsLinear(), that.getIsLinear());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getObjectCodeNumber(), getObjectName(), getObjectDescription(), isLinear);
+        return Objects.hash(getId(), getObjectCodeNumber(), getObjectName(), getObjectDescription(), getIsLinear());
     }
 
     @Override

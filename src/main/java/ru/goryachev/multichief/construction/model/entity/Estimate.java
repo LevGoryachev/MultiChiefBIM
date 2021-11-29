@@ -3,6 +3,7 @@ package ru.goryachev.multichief.construction.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Estimate - estimated project cost of the construction site or its part
@@ -47,5 +48,29 @@ public class Estimate {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Estimate)) return false;
+        Estimate estimate = (Estimate) o;
+        return Objects.equals(getId(), estimate.getId()) &&
+                Objects.equals(getEstimateCodeNumber(), estimate.getEstimateCodeNumber()) &&
+                Objects.equals(getLink(), estimate.getLink());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getEstimateCodeNumber(), getLink());
+    }
+
+    @Override
+    public String toString() {
+        return "Estimate{" +
+                "id=" + id +
+                ", estimateCodeNumber='" + estimateCodeNumber + '\'' +
+                ", link='" + link + '\'' +
+                '}';
     }
 }

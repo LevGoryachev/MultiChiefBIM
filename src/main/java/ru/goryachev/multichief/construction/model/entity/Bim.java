@@ -3,6 +3,7 @@ package ru.goryachev.multichief.construction.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Bim - building information model
@@ -91,5 +92,37 @@ public class Bim {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Bim)) return false;
+        Bim bim = (Bim) o;
+        return Objects.equals(getId(), bim.getId()) &&
+                Objects.equals(getProjectCodeNumber(), bim.getProjectCodeNumber()) &&
+                Objects.equals(getProjectName(), bim.getProjectName()) &&
+                Objects.equals(getLod(), bim.getLod()) &&
+                Objects.equals(getProjectTypeId(), bim.getProjectTypeId()) &&
+                Objects.equals(getEirId(), bim.getEirId()) &&
+                Objects.equals(getLink(), bim.getLink());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getProjectCodeNumber(), getProjectName(), getLod(), getProjectTypeId(), getEirId(), getLink());
+    }
+
+    @Override
+    public String toString() {
+        return "Bim{" +
+                "id=" + id +
+                ", projectCodeNumber='" + projectCodeNumber + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", lod=" + lod +
+                ", projectTypeId=" + projectTypeId +
+                ", eirId=" + eirId +
+                ", link='" + link + '\'' +
+                '}';
     }
 }
