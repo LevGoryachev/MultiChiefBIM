@@ -3,7 +3,7 @@
 <p><b>MultiChiefConstruction</b> is a microservice that is responsible for preparing data (DTO) for orchestrators (modules of <a href="https://github.com/LevGoryachev/MultiChiefMain">MultiChiefMain</a>).</p> 
 <p><b>Summary: Java 11, Spring-Boot, Spring Security, Spring Data JPA (Hibernate)</b></p>
 <p><b>Database: PostgreSQL</b></p>
-<p><b>API documentation:</b> Swagger (deploy and follow MultiChiefConstruction<b>/swagger-ui/</b>)</p>
+<p><b>API:</b> deploy and follow /swagger-ui/</b>)</p>
 
 <h3>Architecture</h3>
 <p>Customized microservice-based domain-driven architecture.<p/>

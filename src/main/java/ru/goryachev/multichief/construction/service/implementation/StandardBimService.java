@@ -28,11 +28,11 @@ import java.util.stream.Collectors;
 @PropertySource("classpath:service_layer.properties")
 public class StandardBimService implements StandardService {
 
-    private BimRepository bimRepository;
-    private BimConverter bimConverter;
-
     @Value("${model.entity.alias.bim}")
     private String bimEntityAlias;
+
+    private BimRepository bimRepository;
+    private BimConverter bimConverter;
 
     @Autowired
     public StandardBimService(BimRepository bimRepository, BimConverter bimConverter) {
@@ -42,11 +42,11 @@ public class StandardBimService implements StandardService {
 
     @Override
     public List<CommonDto> getAll () {
-        List<Bim> allMaterials = bimRepository.findAll();
-        if (allMaterials.isEmpty()) {
+        List<Bim> allBims = bimRepository.findAll();
+        if (allBims.isEmpty()) {
             throw new MultiChiefEmptyListException(bimEntityAlias);
         }
-        return allMaterials.stream().map(bimConverter::entityToDto).collect(Collectors.toList());
+        return allBims.stream().map(bimConverter::entityToDto).collect(Collectors.toList());
     }
 
     public CommonDto getById (Long id) {

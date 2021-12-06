@@ -27,11 +27,11 @@ import java.util.stream.Collectors;
 @PropertySource("classpath:service_layer.properties")
 public class StandardProjectTypeService implements StandardService {
 
-    private ProjectTypeRepository projectTypeRepository;
-    private ProjectTypeConverter projectTypeConverter;
-
     @Value("${model.entity.alias.projecttype}")
     private String projectTypeEntityAlias;
+
+    private ProjectTypeRepository projectTypeRepository;
+    private ProjectTypeConverter projectTypeConverter;
 
     @Autowired
     public StandardProjectTypeService(ProjectTypeRepository projectTypeRepository, ProjectTypeConverter projectTypeConverter) {

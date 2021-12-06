@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "ru.goryachev.multichief.construction")
-@EnableJpaRepositories(basePackages = "ru.goryachev.multichief")
+@EnableJpaRepositories(basePackages = "ru.goryachev.multichief.construction")
 @EntityScan(basePackages = "ru.goryachev.multichief.construction")
 public class AppWebInit extends SpringBootServletInitializer {
 

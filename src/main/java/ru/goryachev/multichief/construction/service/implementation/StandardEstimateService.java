@@ -27,11 +27,11 @@ import java.util.stream.Collectors;
 @PropertySource("classpath:service_layer.properties")
 public class StandardEstimateService implements StandardService {
 
-    private EstimateRepository estimateRepository;
-    private EstimateConverter estimateConverter;
-
     @Value("${model.entity.alias.estimate}")
     private String estimateEntityAlias;
+
+    private EstimateRepository estimateRepository;
+    private EstimateConverter estimateConverter;
 
     @Autowired
     public StandardEstimateService(EstimateRepository estimateRepository, EstimateConverter estimateConverter) {

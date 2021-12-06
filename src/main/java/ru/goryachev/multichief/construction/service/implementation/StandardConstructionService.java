@@ -29,11 +29,11 @@ import java.util.stream.Collectors;
 @PropertySource("classpath:service_layer.properties")
 public class StandardConstructionService implements StandardService {
 
-    private ConstructionRepository constructionRepository;
-    private ConstructionConverter constructionConverter;
-
     @Value("${model.entity.alias.construction}")
     private String constructionEntityAlias;
+
+    private ConstructionRepository constructionRepository;
+    private ConstructionConverter constructionConverter;
 
     @Autowired
     public StandardConstructionService(ConstructionRepository constructionRepository, ConstructionConverter constructionConverter) {

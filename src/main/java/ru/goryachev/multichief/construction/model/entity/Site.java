@@ -20,14 +20,26 @@ public class Site {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "construction_id")
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "construction_id", insertable = false, updatable = false)
+    private Construction construction;
+
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "bim_id", insertable = false, updatable = false)
+    private Bim bim;
+
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "estimate_id", insertable = false, updatable = false)
+    private Estimate estimate;
+
+  /*  @Column(name = "construction_id")
     private Long constructionId;
 
     @Column(name = "bim_id")
     private Long bimId;
 
     @Column(name = "estimate_id")
-    private Long estimateId;
+    private Long estimateId;*/
 
     public Long getId() {
         return id;
@@ -37,27 +49,27 @@ public class Site {
         this.id = id;
     }
 
-    public Long getConstructionId() {
-        return constructionId;
+    public Construction getConstruction() {
+        return construction;
     }
 
-    public void setConstructionId(Long constructionId) {
-        this.constructionId = constructionId;
+    public void setConstruction(Construction construction) {
+        this.construction = construction;
     }
 
-    public Long getBimId() {
-        return bimId;
+    public Bim getBim() {
+        return bim;
     }
 
-    public void setBimId(Long bimId) {
-        this.bimId = bimId;
+    public void setBim(Bim bim) {
+        this.bim = bim;
     }
 
-    public Long getEstimateId() {
-        return estimateId;
+    public Estimate getEstimate() {
+        return estimate;
     }
 
-    public void setEstimateId(Long estimateId) {
-        this.estimateId = estimateId;
+    public void setEstimate(Estimate estimate) {
+        this.estimate = estimate;
     }
 }

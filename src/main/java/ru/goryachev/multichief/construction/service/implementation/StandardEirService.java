@@ -27,11 +27,11 @@ import java.util.stream.Collectors;
 @PropertySource("classpath:service_layer.properties")
 public class StandardEirService implements StandardService {
 
-    private EirRepository eirRepository;
-    private EirConverter eirConverter;
-
     @Value("${model.entity.alias.eir}")
     private String eirEntityAlias;
+
+    private EirRepository eirRepository;
+    private EirConverter eirConverter;
 
     @Autowired
     public StandardEirService(EirRepository eirRepository, EirConverter eirConverter) {
