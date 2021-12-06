@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import ru.goryachev.multichief.construction.exception.MultiChiefEmptyListException;
-import ru.goryachev.multichief.construction.model.dto.projection.SiteProjection;
+import ru.goryachev.multichief.construction.exception.MultiChiefObjectNotFoundException;
 import ru.goryachev.multichief.construction.model.dto.request.ConstructionSiteRequestDto;
 import ru.goryachev.multichief.construction.model.entity.Site;
 import ru.goryachev.multichief.construction.repository.BimRepository;
@@ -13,7 +13,6 @@ import ru.goryachev.multichief.construction.repository.ConstructionRepository;
 import ru.goryachev.multichief.construction.repository.EstimateRepository;
 import ru.goryachev.multichief.construction.repository.SiteRepository;
 import ru.goryachev.multichief.construction.service.SpecialService;
-
 
 import javax.transaction.Transactional;
 import java.util.LinkedHashMap;
@@ -35,9 +34,6 @@ public class SpecialSiteService implements SpecialService {
 
     @Value("${model.entity.alias.site}")
     private String siteEntityAlias;
-    @Value("${model.entity.alias.bim}")
-    private String bimEntityAlias;
-
 
     private SiteRepository siteRepository;
     private ConstructionRepository constructionRepository;
@@ -53,32 +49,30 @@ public class SpecialSiteService implements SpecialService {
         this.estimateRepository = estimateRepository;
     }
 
-
     public List<Site> getAll (){
         return siteRepository.findAll();
     }
 
-    public List<Site> getAllByConstruction (Long constructionId) {
-        List<Site> constructionSites = siteRepository.findByConstructionId(constructionId);
+    public List<Site> findAllByConstructionWithType (Long constructionId, String typeName) {
+        List<Site> constructionSites;
+        if (typeName == null){
+            constructionSites = siteRepository.findByConstructionId(constructionId);
+            if (constructionSites.isEmpty()){
+                throw new MultiChiefEmptyListException(siteEntityAlias);
+            }
+            return constructionSites;
+        }
+        constructionSites = siteRepository.findAllByConstructionWithType(constructionId, typeName);
         if (constructionSites.isEmpty()){
             throw new MultiChiefEmptyListException(siteEntityAlias);
         }
         return constructionSites;
     }
 
-    /*public List<SiteProjection> getAllByBomId(Long bomId) {
-
-        if (!bomRepository.existsById(bomId)){
-            throw new MultiChiefObjectNotFoundException(bomEntityAlias, bomId);
-        }
-
-        List<SiteProjection> bomItemList = bomItemRepository.findByBomId(bomId);
-
-        if (bomItemList.isEmpty()) {
-            throw new MultiChiefEmptyListException(bomitemEntityAlias);
-        }
-        return bomItemList;
-    }*/
+    public Site getById (Long id) {
+        Site site = siteRepository.findById(id).orElseThrow(() -> new MultiChiefObjectNotFoundException(siteEntityAlias, id));
+        return site;
+    }
 
     @Transactional
     public Map<String, Object> save (Long constructionId, ConstructionSiteRequestDto constructionSiteRequestDto) {
@@ -97,7 +91,10 @@ public class SpecialSiteService implements SpecialService {
     }
 
     @Transactional
-    public void delete (Long id) {
-       siteRepository.deleteById(id);
+    public Map<String, Object> deleteByConstructionIdAndId (Long constructionId,Long id) {
+       siteRepository.deleteByConstructionIdAndId(constructionId, id);
+        Map<String, Object> responseBody = new LinkedHashMap<>();
+        responseBody.put("result", siteEntityAlias + " " + "with id" + " " + id + " " + "was deleted");
+        return responseBody;
     }
 }

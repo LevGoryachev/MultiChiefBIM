@@ -49,6 +49,6 @@ public class EstimateController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Object> delete (@PathVariable Long id) {
-        return new ResponseEntity<>(standardEstimateService.delete(id),HttpStatus.OK);
+        return new ResponseEntity<>(standardEstimateService.delete(id), HttpStatus.OK);
     }
 }

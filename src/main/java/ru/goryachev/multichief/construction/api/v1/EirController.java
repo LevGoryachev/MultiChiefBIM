@@ -49,6 +49,6 @@ public class EirController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Object> delete (@PathVariable Long id) {
-        return new ResponseEntity<>(standardEirService.delete(id),HttpStatus.OK);
+        return new ResponseEntity<>(standardEirService.delete(id), HttpStatus.OK);
     }
 }

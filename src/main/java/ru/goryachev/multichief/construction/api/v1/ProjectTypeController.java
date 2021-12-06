@@ -49,6 +49,6 @@ public class ProjectTypeController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Object> delete (@PathVariable Long id) {
-        return new ResponseEntity<>(standardProjectTypeService.delete(id),HttpStatus.OK);
+        return new ResponseEntity<>(standardProjectTypeService.delete(id), HttpStatus.OK);
     }
 }

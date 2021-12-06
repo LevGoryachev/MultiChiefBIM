@@ -29,6 +29,10 @@ public class Bim {
     @Column(name = "lod")
     private Short lod;
 
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_type_id", insertable = false, updatable = false)
+    private ProjectType projectType;
+
     @Column(name = "project_type_id")
     private Long projectTypeId;
 
@@ -70,6 +74,14 @@ public class Bim {
         this.lod = lod;
     }
 
+    public ProjectType getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(ProjectType projectType) {
+        this.projectType = projectType;
+    }
+
     public Long getProjectTypeId() {
         return projectTypeId;
     }
@@ -103,6 +115,7 @@ public class Bim {
                 Objects.equals(getProjectCodeNumber(), bim.getProjectCodeNumber()) &&
                 Objects.equals(getProjectName(), bim.getProjectName()) &&
                 Objects.equals(getLod(), bim.getLod()) &&
+                Objects.equals(getProjectType(), bim.getProjectType()) &&
                 Objects.equals(getProjectTypeId(), bim.getProjectTypeId()) &&
                 Objects.equals(getEirId(), bim.getEirId()) &&
                 Objects.equals(getLink(), bim.getLink());
@@ -110,7 +123,7 @@ public class Bim {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getProjectCodeNumber(), getProjectName(), getLod(), getProjectTypeId(), getEirId(), getLink());
+        return Objects.hash(getId(), getProjectCodeNumber(), getProjectName(), getLod(), getProjectType(), getProjectTypeId(), getEirId(), getLink());
     }
 
     @Override
@@ -120,6 +133,7 @@ public class Bim {
                 ", projectCodeNumber='" + projectCodeNumber + '\'' +
                 ", projectName='" + projectName + '\'' +
                 ", lod=" + lod +
+                ", projectType=" + projectType +
                 ", projectTypeId=" + projectTypeId +
                 ", eirId=" + eirId +
                 ", link='" + link + '\'' +

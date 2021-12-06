@@ -32,19 +32,15 @@ public class SiteController {
         return new ResponseEntity<>(specialSiteService.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("{constructionId}/sites")
-    public ResponseEntity<List<Site>> getAllByConstruction (@PathVariable Long constructionId) {
-        return new ResponseEntity<>(specialSiteService.getAllByConstruction(constructionId), HttpStatus.OK);
+    @GetMapping("/sites/{id}")
+    public ResponseEntity<Site> getById (@PathVariable Long id){
+        return new ResponseEntity<>(specialSiteService.getById(id), HttpStatus.OK);
     }
 
-    /*@GetMapping("{constructionId}/sites/all")
-    public ResponseEntity<List<Site>> getExperimental () {
-        return new ResponseEntity<>(specialSiteService.getAll(), HttpStatus.OK);
-    }*/
-
-
-
-
+    @GetMapping("{constructionId}/sites")
+    public ResponseEntity<List<Site>> getAllByConstruction (@PathVariable Long constructionId, @RequestParam (value = "type", required = false) String typeName) {
+        return new ResponseEntity<>(specialSiteService.findAllByConstructionWithType(constructionId, typeName), HttpStatus.OK);
+    }
 
   /*  @PostMapping("{constructionId}/sites")
     public ResponseEntity<Object> createItems (@PathVariable Long constructionId, @RequestBody ConstructionSiteRequestDto requestDto) {
@@ -57,8 +53,7 @@ public class SiteController {
     }*/
 
     @DeleteMapping("{constructionId}/sites/{id}")//remove id and implement deleteAllBy
-    public ResponseEntity<Throwable> deleteItems (@PathVariable Long id) {
-        specialSiteService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Object> deleteItems (@PathVariable Long constructionId, @PathVariable Long id) {
+        return new ResponseEntity<>(specialSiteService.deleteByConstructionIdAndId(constructionId, id), HttpStatus.OK);
     }
 }

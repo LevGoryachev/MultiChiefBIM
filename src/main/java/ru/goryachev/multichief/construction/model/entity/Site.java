@@ -3,6 +3,7 @@ package ru.goryachev.multichief.construction.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Site - Construction site of certain Construction.
@@ -71,5 +72,21 @@ public class Site {
 
     public void setEstimate(Estimate estimate) {
         this.estimate = estimate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Site)) return false;
+        Site site = (Site) o;
+        return Objects.equals(getId(), site.getId()) &&
+                Objects.equals(getConstruction(), site.getConstruction()) &&
+                Objects.equals(getBim(), site.getBim()) &&
+                Objects.equals(getEstimate(), site.getEstimate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getConstruction(), getBim(), getEstimate());
     }
 }

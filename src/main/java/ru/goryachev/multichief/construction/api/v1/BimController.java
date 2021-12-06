@@ -49,6 +49,6 @@ public class BimController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Object> delete (@PathVariable Long id) {
-        return new ResponseEntity<>(standardBimService.delete(id),HttpStatus.OK);
+        return new ResponseEntity<>(standardBimService.delete(id), HttpStatus.OK);
     }
 }

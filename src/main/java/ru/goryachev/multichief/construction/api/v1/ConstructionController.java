@@ -49,6 +49,6 @@ public class ConstructionController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Object> delete (@PathVariable Long id) {
-        return new ResponseEntity<>(standardConstructionService.delete(id),HttpStatus.OK);
+        return new ResponseEntity<>(standardConstructionService.delete(id), HttpStatus.OK);
     }
 }
