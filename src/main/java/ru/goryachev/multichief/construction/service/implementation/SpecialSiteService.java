@@ -34,6 +34,12 @@ public class SpecialSiteService implements SpecialService {
 
     @Value("${model.entity.alias.site}")
     private String siteEntityAlias;
+    @Value("${model.entity.alias.construction}")
+    private String constructionEntityAlias;
+    @Value("${model.entity.alias.bim}")
+    private String bimEntityAlias;
+    @Value("${model.entity.alias.estimate}")
+    private String estimateEntityAlias;
 
     private SiteRepository siteRepository;
     private ConstructionRepository constructionRepository;
@@ -76,18 +82,46 @@ public class SpecialSiteService implements SpecialService {
 
     @Transactional
     public Map<String, Object> save (Long constructionId, ConstructionSiteRequestDto constructionSiteRequestDto) {
-        /*Bom bom = bomRepository.findById(bomId).orElseThrow(() -> new MultiChiefObjectNotFoundException(bomEntityAlias, bomId));
-        Material material = materialRepository.findById(itemRequestDto.getMaterialId()).orElseThrow(() -> new MultiChiefObjectNotFoundException(materialEntityAlias, itemRequestDto.getMaterialId()));
-        BomItem bomItem = new BomItem(bom, material, itemRequestDto.getQty());
+        if (!constructionRepository.existsById(constructionId)){
+            throw new MultiChiefObjectNotFoundException(constructionEntityAlias, constructionId);
+        }
+        Map<String,Object> responseBody = new LinkedHashMap<>();
+        responseBody.put("result", siteEntityAlias +" " + "was saved in DB");
 
-        BomItem savedBomItem = bomItemRepository.save(bomItem);
+        Site site = new Site();
+        site.setConstructionId(constructionId);
 
-        Map<String, Object> responseBody = new LinkedHashMap<>();
-        responseBody.put("result", bomitemEntityAlias +" " + "was saved in DB");
-        responseBody.put("material", savedBomItem.getMaterial().getName());
-        responseBody.put("quantity", savedBomItem.getQty());
-        return responseBody;*/
-        return null;
+        if (!bimRepository.existsById(constructionSiteRequestDto.getBimId())){
+            site.setBimId(null);
+            responseBody.put("bimnotfound", bimEntityAlias + " " + "with id" + " " + constructionSiteRequestDto.getBimId() + " " + "was not found, and was set null");
+            if (!estimateRepository.existsById(constructionSiteRequestDto.getEstimateId())){
+                site.setEstimateId(null);
+                Site savedSite = siteRepository.save(site);
+                responseBody.put("estimatenotfound", estimateEntityAlias + " " + "with id" + " " + constructionSiteRequestDto.getEstimateId() + " " + "was not found, and was set null");
+                responseBody.put("entity", savedSite);
+                return responseBody;
+            }
+            site.setEstimateId(constructionSiteRequestDto.getEstimateId());
+            Site savedSite = siteRepository.save(site);
+            responseBody.put("entity", savedSite);
+            return responseBody;
+        }
+
+        site.setBimId(constructionSiteRequestDto.getBimId());
+
+        if (!estimateRepository.existsById(constructionSiteRequestDto.getEstimateId())){
+            site.setEstimateId(null);
+            Site savedSite = siteRepository.save(site);
+            responseBody.put("estimatenotfound", estimateEntityAlias + " " + "with id" + " " + constructionSiteRequestDto.getEstimateId() + " " + "was not found, and was set null");
+            responseBody.put("entity", savedSite);
+            return responseBody;
+        }
+
+        site.setEstimateId(constructionSiteRequestDto.getEstimateId());
+
+        Site savedSite = siteRepository.save(site);
+        responseBody.put("entity", savedSite);
+        return responseBody;
     }
 
     @Transactional

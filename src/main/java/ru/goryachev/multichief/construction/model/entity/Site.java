@@ -25,22 +25,22 @@ public class Site {
     @JoinColumn(name = "construction_id", insertable = false, updatable = false)
     private Construction construction;
 
+    @Column(name = "construction_id")
+    private Long constructionId;
+
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "bim_id", insertable = false, updatable = false)
     private Bim bim;
+
+    @Column(name = "bim_id")
+    private Long bimId;
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "estimate_id", insertable = false, updatable = false)
     private Estimate estimate;
 
-  /*  @Column(name = "construction_id")
-    private Long constructionId;
-
-    @Column(name = "bim_id")
-    private Long bimId;
-
     @Column(name = "estimate_id")
-    private Long estimateId;*/
+    private Long estimateId;
 
     public Long getId() {
         return id;
@@ -58,12 +58,28 @@ public class Site {
         this.construction = construction;
     }
 
+    public Long getConstructionId() {
+        return constructionId;
+    }
+
+    public void setConstructionId(Long constructionId) {
+        this.constructionId = constructionId;
+    }
+
     public Bim getBim() {
         return bim;
     }
 
     public void setBim(Bim bim) {
         this.bim = bim;
+    }
+
+    public Long getBimId() {
+        return bimId;
+    }
+
+    public void setBimId(Long bimId) {
+        this.bimId = bimId;
     }
 
     public Estimate getEstimate() {
@@ -74,6 +90,14 @@ public class Site {
         this.estimate = estimate;
     }
 
+    public Long getEstimateId() {
+        return estimateId;
+    }
+
+    public void setEstimateId(Long estimateId) {
+        this.estimateId = estimateId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,12 +105,28 @@ public class Site {
         Site site = (Site) o;
         return Objects.equals(getId(), site.getId()) &&
                 Objects.equals(getConstruction(), site.getConstruction()) &&
+                Objects.equals(getConstructionId(), site.getConstructionId()) &&
                 Objects.equals(getBim(), site.getBim()) &&
-                Objects.equals(getEstimate(), site.getEstimate());
+                Objects.equals(getBimId(), site.getBimId()) &&
+                Objects.equals(getEstimate(), site.getEstimate()) &&
+                Objects.equals(getEstimateId(), site.getEstimateId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getConstruction(), getBim(), getEstimate());
+        return Objects.hash(getId(), getConstruction(), getConstructionId(), getBim(), getBimId(), getEstimate(), getEstimateId());
+    }
+
+    @Override
+    public String toString() {
+        return "Site{" +
+                "id=" + id +
+                ", construction=" + construction +
+                ", constructionId=" + constructionId +
+                ", bim=" + bim +
+                ", bimId=" + bimId +
+                ", estimate=" + estimate +
+                ", estimateId=" + estimateId +
+                '}';
     }
 }

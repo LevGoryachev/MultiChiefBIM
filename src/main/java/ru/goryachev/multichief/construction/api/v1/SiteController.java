@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.goryachev.multichief.construction.model.dto.request.ConstructionSiteRequestDto;
 import ru.goryachev.multichief.construction.model.entity.Site;
 import ru.goryachev.multichief.construction.service.implementation.SpecialSiteService;
 
@@ -42,7 +43,7 @@ public class SiteController {
         return new ResponseEntity<>(specialSiteService.findAllByConstructionWithType(constructionId, typeName), HttpStatus.OK);
     }
 
-  /*  @PostMapping("{constructionId}/sites")
+    @PostMapping("{constructionId}/sites")
     public ResponseEntity<Object> createItems (@PathVariable Long constructionId, @RequestBody ConstructionSiteRequestDto requestDto) {
         return new ResponseEntity<>(specialSiteService.save(constructionId, requestDto), HttpStatus.CREATED);
     }
@@ -50,7 +51,7 @@ public class SiteController {
     @PutMapping("{constructionId}/sites")
     public ResponseEntity<Object> updateItems (@PathVariable Long constructionId, @RequestBody ConstructionSiteRequestDto modifiedSite) {
         return new ResponseEntity<>(specialSiteService.save(constructionId, modifiedSite), HttpStatus.CREATED);
-    }*/
+    }
 
     @DeleteMapping("{constructionId}/sites/{id}")//remove id and implement deleteAllBy
     public ResponseEntity<Object> deleteItems (@PathVariable Long constructionId, @PathVariable Long id) {
