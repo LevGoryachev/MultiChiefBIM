@@ -1,6 +1,7 @@
 package ru.goryachev.multichief.construction.model.dto.response;
 
 import ru.goryachev.multichief.construction.model.dto.PreformDto;
+import ru.goryachev.multichief.construction.model.entity.Eir;
 import ru.goryachev.multichief.construction.model.entity.ProjectType;
 
 /**
@@ -22,9 +23,11 @@ public class BimPreformDTO implements PreformDto {
 
     private ProjectType projectType;
 
-    private Long projectTypeId;
+    //private Long projectTypeId;
 
-    private Long eirId;
+    private Eir eir;
+
+   // private Long eirId;
 
     private String link;
 
@@ -68,20 +71,12 @@ public class BimPreformDTO implements PreformDto {
         this.projectType = projectType;
     }
 
-    public Long getProjectTypeId() {
-        return projectTypeId;
+    public Eir getEir() {
+        return eir;
     }
 
-    public void setProjectTypeId(Long projectTypeId) {
-        this.projectTypeId = projectTypeId;
-    }
-
-    public Long getEirId() {
-        return eirId;
-    }
-
-    public void setEirId(Long eirId) {
-        this.eirId = eirId;
+    public void setEir(Eir eir) {
+        this.eir = eir;
     }
 
     public String getLink() {

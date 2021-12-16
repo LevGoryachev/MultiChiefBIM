@@ -3,7 +3,6 @@ package ru.goryachev.multichief.construction.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 /**
  * Bim - building information model
@@ -35,6 +34,10 @@ public class Bim {
 
     @Column(name = "project_type_id")
     private Long projectTypeId;
+
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "eir_id", insertable = false, updatable = false)
+    private Eir eir;
 
     @Column(name = "eir_id")
     private Long eirId;
@@ -90,6 +93,14 @@ public class Bim {
         this.projectTypeId = projectTypeId;
     }
 
+    public Eir getEir() {
+        return eir;
+    }
+
+    public void setEir(Eir eir) {
+        this.eir = eir;
+    }
+
     public Long getEirId() {
         return eirId;
     }
@@ -104,39 +115,5 @@ public class Bim {
 
     public void setLink(String link) {
         this.link = link;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Bim)) return false;
-        Bim bim = (Bim) o;
-        return Objects.equals(getId(), bim.getId()) &&
-                Objects.equals(getProjectCodeNumber(), bim.getProjectCodeNumber()) &&
-                Objects.equals(getProjectName(), bim.getProjectName()) &&
-                Objects.equals(getLod(), bim.getLod()) &&
-                Objects.equals(getProjectType(), bim.getProjectType()) &&
-                Objects.equals(getProjectTypeId(), bim.getProjectTypeId()) &&
-                Objects.equals(getEirId(), bim.getEirId()) &&
-                Objects.equals(getLink(), bim.getLink());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getProjectCodeNumber(), getProjectName(), getLod(), getProjectType(), getProjectTypeId(), getEirId(), getLink());
-    }
-
-    @Override
-    public String toString() {
-        return "Bim{" +
-                "id=" + id +
-                ", projectCodeNumber='" + projectCodeNumber + '\'' +
-                ", projectName='" + projectName + '\'' +
-                ", lod=" + lod +
-                ", projectType=" + projectType +
-                ", projectTypeId=" + projectTypeId +
-                ", eirId=" + eirId +
-                ", link='" + link + '\'' +
-                '}';
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import ru.goryachev.multichief.construction.exception.MultiChiefEmptyListException;
 import ru.goryachev.multichief.construction.exception.MultiChiefObjectNotFoundException;
-import ru.goryachev.multichief.construction.model.dto.CommonDto;
 import ru.goryachev.multichief.construction.model.dto.request.BimRequestDto;
 import ru.goryachev.multichief.construction.model.dto.response.BimPreformDTO;
 import ru.goryachev.multichief.construction.model.entity.Bim;
@@ -52,20 +51,6 @@ public class StandardBimService implements SpecialService {
         this.specialBimConverter = specialBimConverter;
     }
 
-   /* @Override
-    public List<CommonDto> getAll () {
-        List<Bim> allBims = bimRepository.findAll();
-        if (allBims.isEmpty()) {
-            throw new MultiChiefEmptyListException(bimEntityAlias);
-        }
-        return allBims.stream().map(bimConverter::entityToDto).collect(Collectors.toList());
-    }
-
-    public CommonDto getById (Long id) {
-        Bim bim = bimRepository.findById(id).orElseThrow(() -> new MultiChiefObjectNotFoundException(bimEntityAlias, id));
-        return bimConverter.entityToDto(bim);
-    }*/
-
     public List<BimPreformDTO> getAll () {
         List<Bim> allBims = bimRepository.findAll();
         if (allBims.isEmpty()) {
@@ -80,19 +65,12 @@ public class StandardBimService implements SpecialService {
     }
 
     public Map<String, Object> save (BimRequestDto bimRequestDto) {
-        Bim bim = new Bim();
+        Bim bim  = specialBimConverter.dtoToEntity(bimRequestDto);
         Map<String,Object> responseBody = new LinkedHashMap<>();
-
-        bim = specialBimConverter.dtoToEntity(bimRequestDto);
 
         if (!projectTypeRepository.existsById(bimRequestDto.getProjectTypeId())){
             bim.setProjectTypeId(null);
             responseBody.put("typenotfound", projectTypeEntityAlias + " " + "with id" + " " + bimRequestDto.getProjectTypeId() + " " + "was not found, and was set null");
-
-            /*site.setEstimateId(constructionSiteRequestDto.getEstimateId());
-            Site savedSite = siteRepository.save(site);
-            responseBody.put("entity", savedSite);
-            return responseBody;*/
         }
 
         if (!eirRepository.existsById(bimRequestDto.getEirId())){
@@ -106,19 +84,6 @@ public class StandardBimService implements SpecialService {
         responseBody.put("name", savedBim.getProjectName());
         return responseBody;
     }
-
-
-    /*public Map<String, Object> update (BimRequestDto modifiedBim) {
-        Bim bim = (Bim) specialBimConverter.dtoToEntity(modifiedBim);
-
-        Bim savedBim = bimRepository.save(bim);
-        Map<String, Object> responseBody = new LinkedHashMap<>();
-        responseBody.put("result", bimEntityAlias + " " + "was updated");
-        responseBody.put("id", savedBim.getId());
-        responseBody.put("name", savedBim.getProjectName());
-        return responseBody;
-    }*/
-
 
     public Map<String, Object> delete (Long id) {
         bimRepository.deleteById(id);

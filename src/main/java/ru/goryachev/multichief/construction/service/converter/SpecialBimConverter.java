@@ -12,7 +12,7 @@ import ru.goryachev.multichief.construction.model.entity.Bim;
  */
 
 @Component
-public class SpecialBimConverter /*implements Converter*/ {
+public class SpecialBimConverter {
 
     public BimPreformDTO entityToDto (Bim bim){
           BimPreformDTO bimPreformDTO = new BimPreformDTO();
@@ -20,9 +20,8 @@ public class SpecialBimConverter /*implements Converter*/ {
           bimPreformDTO.setProjectCodeNumber(bim.getProjectCodeNumber());
           bimPreformDTO.setProjectName(bim.getProjectName());
           bimPreformDTO.setLod(bim.getLod());
-          bimPreformDTO.setProjectType(bim.getProjectType()); // gregergggergerggrergergerg
-          bimPreformDTO.setProjectTypeId(bim.getProjectTypeId());
-          bimPreformDTO.setEirId(bim.getEirId());
+          bimPreformDTO.setProjectType(bim.getProjectType());
+          bimPreformDTO.setEir(bim.getEir());
           bimPreformDTO.setLink(bim.getLink());
           return bimPreformDTO;
     }
