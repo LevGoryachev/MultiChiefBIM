@@ -1,16 +1,14 @@
-package ru.goryachev.multichief.construction.model.dto.response;
-
-import ru.goryachev.multichief.construction.model.dto.PreformDto;
-import ru.goryachev.multichief.construction.model.entity.ProjectType;
+package ru.goryachev.multichief.construction.model.dto.request;
 
 /**
- * BimPreformDTO is a response DTO (preform of a document) - engineering, designe or other type of project for certain building construction.
- * contains a head of document and list of materials (items).
+ * BimRequestDto is a transfer object for receiving properties of the building information model (project).
+ * BimRequestDto is used for request body contains properties and IDs (for one-to-many relations) to create or modify entity of building information model.
+ * Service layer checks if exist (BIM and Estimate) and use them in Construction Site domain (to create new or modify Construction Site).
  * @author Lev Goryachev
  * @version 1.1
  */
 
-public class BimPreformDTO implements PreformDto {
+public class BimRequestDto {
 
     private Long id;
 
@@ -19,8 +17,6 @@ public class BimPreformDTO implements PreformDto {
     private String projectName;
 
     private Short lod;
-
-    private ProjectType projectType;
 
     private Long projectTypeId;
 
@@ -58,14 +54,6 @@ public class BimPreformDTO implements PreformDto {
 
     public void setLod(Short lod) {
         this.lod = lod;
-    }
-
-    public ProjectType getProjectType() {
-        return projectType;
-    }
-
-    public void setProjectType(ProjectType projectType) {
-        this.projectType = projectType;
     }
 
     public Long getProjectTypeId() {

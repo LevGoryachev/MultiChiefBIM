@@ -6,7 +6,7 @@ package ru.goryachev.multichief.construction.model.dto.projection;
  * @version 1.1
  */
 public interface BimProjection {
-    //Long getId();
+    Long getId();
     String getProjectCodeNumber();
     String getProjectName();
     String getLod();
