@@ -10,24 +10,18 @@ import ru.goryachev.multichief.construction.service.implementation.SpecialSiteSe
 
 import java.util.List;
 
-/**
- * MultiChiefConstruction API: see app/swagger-ui/
- * @author Lev Goryachev
- * @version 1
- */
-
-@RestController
-@RequestMapping("/api/v1/constructions")
+/*@RestController
+@RequestMapping("/api/v1/constructions")*/
 public class SiteController {
 
-    private SpecialSiteService specialSiteService;
+   /* private SpecialSiteService specialSiteService;
 
     @Autowired
     public SiteController(SpecialSiteService specialSiteService) {
         this.specialSiteService = specialSiteService;
-    }
+    }*/
 
-    //All construction-sites form DB
+    /*//All construction-sites form DB
     @GetMapping("/sites")
     public ResponseEntity<List<Site>> getAllSites () {
         return new ResponseEntity<>(specialSiteService.getAll(), HttpStatus.OK);
@@ -56,5 +50,5 @@ public class SiteController {
     @DeleteMapping("{constructionId}/sites/{id}")//remove id and implement deleteAllBy
     public ResponseEntity<Object> deleteItems (@PathVariable Long constructionId, @PathVariable Long id) {
         return new ResponseEntity<>(specialSiteService.deleteByConstructionIdAndId(constructionId, id), HttpStatus.OK);
-    }
+    }*/
 }

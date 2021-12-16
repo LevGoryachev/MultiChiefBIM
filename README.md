@@ -1,14 +1,14 @@
 # MultiChiefConstruction
-<p><b>MultiChief</b> is an experimental microservice-based ERP system for construction industry (on-line and off-line interaction between departments and employees). <p/>
+<p><b>MultiChief</b> is an experimental microservice-based ERP system (implementation for construction industry).<p/>
 <p><b>MultiChiefConstruction</b> is a microservice that is responsible for preparing data (DTO) for orchestrators (modules of <a href="https://github.com/LevGoryachev/MultiChiefMain">MultiChiefMain</a>).</p> 
 <p><b>Summary: Java 11, Spring-Boot, Spring Security, Spring Data JPA (Hibernate)</b></p>
 <p><b>Database: PostgreSQL</b></p>
 <p><b>API:</b> deploy and follow /swagger-ui/</p>
 
 <h3>Architecture</h3>
-<p>Customized microservice-based domain-driven architecture.<p/>
+<p>patterns: multi-layered REST service<p/>
 <p><b>MultiChiefConstruction</b> is responsible for a certain functions of domain Construction (CRUD operations of subdomains, preparing special DTOs)
-and does not interact with both other microservices and business-consumer-services.</p>
+and does not interact with both other microservices and customers.</p>
 
 ![MultiChiefConstructionDiagram](https://user-images.githubusercontent.com/61917893/141861431-e1d1fb6d-7faf-43f8-a2af-7330a5f44364.jpg)
 
