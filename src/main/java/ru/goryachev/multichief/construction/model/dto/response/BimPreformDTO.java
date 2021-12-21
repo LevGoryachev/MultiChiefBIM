@@ -1,48 +1,34 @@
-package ru.goryachev.multichief.construction.model.entity;
+package ru.goryachev.multichief.construction.model.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
+import ru.goryachev.multichief.construction.model.dto.PreformDto;
+import ru.goryachev.multichief.construction.model.entity.Eir;
+import ru.goryachev.multichief.construction.model.entity.ProjectType;
 
 /**
- * Bim - building information model
+ * BimPreformDTO is a response DTO (preform of a document) - engineering, designe or other type of project for certain building construction.
+ * contains a head of document and list of materials (items).
  * @author Lev Goryachev
  * @version 1.1
  */
 
-@Entity
-@Table(name = "bim")
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
-public class Bim {
-    @Id
-    @Column(name = "bim_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BimPreformDTO implements PreformDto {
+
     private Long id;
 
-    @Column(name = "project_code_number")
     private String projectCodeNumber;
 
-    @Column(name = "project_name")
     private String projectName;
 
-    @Column(name = "lod")
     private Short lod;
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_type_id", insertable = false, updatable = false)
     private ProjectType projectType;
 
-    @Column(name = "project_type_id")
-    private Long projectTypeId;
+    //private Long projectTypeId;
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "eir_id", insertable = false, updatable = false)
     private Eir eir;
 
-    @Column(name = "eir_id")
-    private Long eirId;
+   // private Long eirId;
 
-    @Column(name = "link")
     private String link;
 
     public Long getId() {
@@ -85,28 +71,12 @@ public class Bim {
         this.projectType = projectType;
     }
 
-    public Long getProjectTypeId() {
-        return projectTypeId;
-    }
-
-    public void setProjectTypeId(Long projectTypeId) {
-        this.projectTypeId = projectTypeId;
-    }
-
     public Eir getEir() {
         return eir;
     }
 
     public void setEir(Eir eir) {
         this.eir = eir;
-    }
-
-    public Long getEirId() {
-        return eirId;
-    }
-
-    public void setEirId(Long eirId) {
-        this.eirId = eirId;
     }
 
     public String getLink() {

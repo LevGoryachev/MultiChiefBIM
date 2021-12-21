@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.goryachev.multichief.construction.model.dto.CommonDto;
-import ru.goryachev.multichief.construction.model.dto.common.BimCommonDto;
-import ru.goryachev.multichief.construction.service.implementation.StandardBimService;
+import ru.goryachev.multichief.construction.model.dto.request.BimRequestDto;
+import ru.goryachev.multichief.construction.model.dto.response.BimPreformDTO;
+import ru.goryachev.multichief.construction.service.implementation.SpecialBimService;
 
 import java.util.List;
 
@@ -20,35 +20,35 @@ import java.util.List;
 @RequestMapping("/api/v1/bims")
 public class BimController {
 
-    private StandardBimService standardBimService;
+    private SpecialBimService specialBimService;
 
     @Autowired
-    public BimController(StandardBimService standardBimService) {
-        this.standardBimService = standardBimService;
+    public BimController(SpecialBimService specialBimService) {
+        this.specialBimService = specialBimService;
     }
 
     @GetMapping
-    public ResponseEntity<List<CommonDto>> getAllBims () {
-        return new ResponseEntity<>(standardBimService.getAll(), HttpStatus.OK);
+    public ResponseEntity<List<BimPreformDTO>> getAllBims () {
+        return new ResponseEntity<>(specialBimService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<CommonDto> getById (@PathVariable Long id) {
-            return new ResponseEntity<>(standardBimService.getById(id), HttpStatus.OK);
+    public ResponseEntity<BimPreformDTO> getById (@PathVariable Long id) {
+            return new ResponseEntity<>(specialBimService.getById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Object> create (@RequestBody BimCommonDto bimCommonDto) {
-        return new ResponseEntity<>(standardBimService.create(bimCommonDto), HttpStatus.CREATED);
+    public ResponseEntity<Object> create (@RequestBody BimRequestDto bimRequestDto) {
+        return new ResponseEntity<>(specialBimService.save(bimRequestDto), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Object> update (@RequestBody BimCommonDto modifiedBim) {
-        return new ResponseEntity<>(standardBimService.update(modifiedBim), HttpStatus.OK);
+    public ResponseEntity<Object> update (@RequestBody BimRequestDto modifiedBim) {
+        return new ResponseEntity<>(specialBimService.save(modifiedBim), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Object> delete (@PathVariable Long id) {
-        return new ResponseEntity<>(standardBimService.delete(id), HttpStatus.OK);
+        return new ResponseEntity<>(specialBimService.delete(id), HttpStatus.OK);
     }
 }

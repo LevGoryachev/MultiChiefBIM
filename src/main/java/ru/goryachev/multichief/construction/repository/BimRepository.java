@@ -11,5 +11,4 @@ import ru.goryachev.multichief.construction.model.entity.Bim;
  */
 @Repository
 public interface BimRepository extends JpaRepository<Bim, Long> {
-
 }

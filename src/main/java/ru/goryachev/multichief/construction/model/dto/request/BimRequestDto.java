@@ -1,48 +1,27 @@
-package ru.goryachev.multichief.construction.model.entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
+package ru.goryachev.multichief.construction.model.dto.request;
 
 /**
- * Bim - building information model
+ * BimRequestDto is a transfer object for receiving properties of the building information model (project).
+ * BimRequestDto is used for request body contains properties and IDs (for one-to-many relations) to create or modify entity of building information model.
+ * Service layer checks if exist (BIM and Estimate) and use them in Construction Site domain (to create new or modify Construction Site).
  * @author Lev Goryachev
  * @version 1.1
  */
 
-@Entity
-@Table(name = "bim")
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
-public class Bim {
-    @Id
-    @Column(name = "bim_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BimRequestDto {
+
     private Long id;
 
-    @Column(name = "project_code_number")
     private String projectCodeNumber;
 
-    @Column(name = "project_name")
     private String projectName;
 
-    @Column(name = "lod")
     private Short lod;
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_type_id", insertable = false, updatable = false)
-    private ProjectType projectType;
-
-    @Column(name = "project_type_id")
     private Long projectTypeId;
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "eir_id", insertable = false, updatable = false)
-    private Eir eir;
-
-    @Column(name = "eir_id")
     private Long eirId;
 
-    @Column(name = "link")
     private String link;
 
     public Long getId() {
@@ -77,28 +56,12 @@ public class Bim {
         this.lod = lod;
     }
 
-    public ProjectType getProjectType() {
-        return projectType;
-    }
-
-    public void setProjectType(ProjectType projectType) {
-        this.projectType = projectType;
-    }
-
     public Long getProjectTypeId() {
         return projectTypeId;
     }
 
     public void setProjectTypeId(Long projectTypeId) {
         this.projectTypeId = projectTypeId;
-    }
-
-    public Eir getEir() {
-        return eir;
-    }
-
-    public void setEir(Eir eir) {
-        this.eir = eir;
     }
 
     public Long getEirId() {

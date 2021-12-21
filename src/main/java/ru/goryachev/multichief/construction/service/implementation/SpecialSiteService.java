@@ -80,7 +80,7 @@ public class SpecialSiteService implements SpecialService {
 
     @Transactional
     public Map<String, Object> save (Long constructionId, ConstructionSiteRequestDto constructionSiteRequestDto) {
-        if (!constructionRepository.existsById(constructionId)){
+        if (constructionId == null || !constructionRepository.existsById(constructionId)){
             throw new MultiChiefObjectNotFoundException(constructionEntityAlias, constructionId);
         }
         Site site = new Site();
@@ -90,11 +90,11 @@ public class SpecialSiteService implements SpecialService {
 
         Map<String,Object> responseBody = new LinkedHashMap<>();
 
-        if(!bimRepository.existsById(constructionSiteRequestDto.getBimId())){
+        if(constructionSiteRequestDto.getBimId() != null && !bimRepository.existsById(constructionSiteRequestDto.getBimId())){
             site.setBimId(null);
             responseBody.put("bimnotfound", bimEntityAlias + " " + "with id" + " " + constructionSiteRequestDto.getBimId() + " " + "was not found, and was set null");
         }
-        if(!estimateRepository.existsById(constructionSiteRequestDto.getEstimateId())){
+        if(constructionSiteRequestDto.getEstimateId() != null && !estimateRepository.existsById(constructionSiteRequestDto.getEstimateId())){
             site.setEstimateId(null);
             responseBody.put("estimatenotfound", estimateEntityAlias + " " + "with id" + " " + constructionSiteRequestDto.getEstimateId() + " " + "was not found, and was set null");
         }
