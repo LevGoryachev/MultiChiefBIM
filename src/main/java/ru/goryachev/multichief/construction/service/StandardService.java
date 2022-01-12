@@ -3,7 +3,7 @@ package ru.goryachev.multichief.construction.service;
 import ru.goryachev.multichief.construction.model.dto.CommonDto;
 
 /**
- * ExtendedService provides CRUD operations for common DTO.
+ * StandardService provides CRUD operations for common DTO.
  * @author Lev Goryachev
  * @version 1.1
  */
